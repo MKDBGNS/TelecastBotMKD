@@ -2,12 +2,18 @@ from pytgcalls import PyTgCalls
 from pytgcalls.types.input_stream import InputStream, AudioPiped
 from pyrogram import Client
 import yt_dlp
+import os
 
-# Initialize audio client
-vc_client = Client("vcbot")
+# 🔐 Load Telegram credentials from Railway environment variables
+API_ID = int(os.environ.get("API_ID"))
+API_HASH = os.environ.get("API_HASH")
+SESSION_STRING = os.environ.get("SESSION_STRING")
+
+# 🎛️ Initialize Pyrogram user client and PyTgCalls
+vc_client = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
 pytgcalls = PyTgCalls(vc_client)
 
-# Join VC and stream audio
+# 🎶 Function to stream YouTube audio into group voice chat
 async def stream_youtube(chat_id, query):
     ydl_opts = {
         'format': 'bestaudio',
