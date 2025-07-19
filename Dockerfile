@@ -13,5 +13,9 @@ RUN mkdir /app/
 COPY . /app
 WORKDIR /app
 RUN pip3 install pip && pip3 install --upgrade pip && pip3 install -U -r requirements.txt
+# Optional: explicitly define these, if needed during build
+ENV API_ID=${API_ID}
+ENV API_HASH=${API_HASH}
+ENV SESSION_STRING=${SESSION_STRING}
 
 CMD python3 main.py
