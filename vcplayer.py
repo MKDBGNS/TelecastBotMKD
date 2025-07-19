@@ -10,7 +10,14 @@ API_HASH = os.environ.get("API_HASH")
 SESSION_STRING = os.environ.get("SESSION_STRING")
 
 # 🎛️ Initialize Pyrogram user client and PyTgCalls
-vc_client = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
+vc_client = Client(
+    name="vcplayer",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    session_string=SESSION_STRING
+)
+
+
 pytgcalls = PyTgCalls(vc_client)
 
 # 🎶 Function to stream YouTube audio into group voice chat
