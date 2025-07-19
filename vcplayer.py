@@ -3,7 +3,7 @@ from pytgcalls.types.input_stream import InputStream, AudioPiped
 from pyrogram import Client
 import yt_dlp
 import os
-
+ 
 # 🚀 Load Railway env vars
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
