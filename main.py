@@ -24,16 +24,25 @@ from utils import LOGGER
 from config import Config
 from pyrogram import idle
 from bot import bot
+from pyrogram import filters
 import asyncio
 import os
 
 if Config.DATABASE_URI:
     from utils import db
 
+@bot.on_message(filters.command("start"))
+async def start_command(_, message):
+    await message.reply_text("Hello, Manoranjan! The bot is live and ready. 🚀")
 
+@bot.on_message(filters.command("ping"))
+async def ping_command(_, message):
+    await message.reply_text("Pong! ✅")
 async def main():
     await bot.start()
     Config.BOT_USERNAME = (await bot.get_me()).username
+
+    
     LOGGER.info(f"{Config.BOT_USERNAME} Started.")
     if Config.DATABASE_URI:
         try:
@@ -45,15 +54,9 @@ async def main():
                         await db.del_config("RESTART")
                     except:
                         pass
-            from pyrogram import filters
+           
 
-            @bot.on_message(filters.command("start"))
-            async def start_command(_, message):
-                await message.reply_text("Hello, Manoranjan! The bot is live and ready. 🚀")
-
-            @bot.on_message(filters.command("ping"))
-            async def ping_command(_, message):
-                await message.reply_text("Pong! ✅")
+            
             await check_changes()
             await sync_from_db()
         except Exception as e:
