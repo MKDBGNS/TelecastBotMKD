@@ -1,21 +1,22 @@
+# Use lightweight Python base
 FROM python:3.10-slim
 
-# Install system deps
-RUN apt update && apt install -y ffmpeg wget gnupg
+# 🛠 Install system dependencies
+RUN apt update && \
+    apt install -y ffmpeg wget gnupg && \
+    apt clean
 
-# Install Node.js
-RUN wget -qO- https://deb.nodesource.com/setup_18.x | bash - && apt install -y nodejs
-
-# Set working directory
+# 📁 Set working directory
 WORKDIR /app
 
-# Copy app files
-COPY . /app
+# 📦 Copy project files
+COPY . .
 
-# Install Python deps
+# 🐍 Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Railway injects env vars automatically
-# Start bot
+# 🟢 Railway injects env vars at runtime — no need to declare them here
+
+# 🚀 Start bot
 CMD ["python3", "main.py"]
