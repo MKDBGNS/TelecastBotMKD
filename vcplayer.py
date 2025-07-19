@@ -4,12 +4,12 @@ from pyrogram import Client
 import yt_dlp
 import os
 
-# 🔐 Load Telegram credentials from Railway environment variables
+# 🚀 Load Railway env vars
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 SESSION_STRING = os.environ.get("SESSION_STRING")
 
-# 🎛️ Initialize Pyrogram user client and PyTgCalls
+# 🔐 Initialize user client and PyTgCalls
 vc_client = Client(
     name="vcplayer",
     api_id=API_ID,
@@ -17,10 +17,9 @@ vc_client = Client(
     session_string=SESSION_STRING
 )
 
-
 pytgcalls = PyTgCalls(vc_client)
 
-# 🎶 Function to stream YouTube audio into group voice chat
+# 🎶 Stream YouTube audio to group VC
 async def stream_youtube(chat_id, query):
     ydl_opts = {
         'format': 'bestaudio',
@@ -35,9 +34,7 @@ async def stream_youtube(chat_id, query):
 
     await pytgcalls.join_group_call(
         chat_id,
-        InputStream(
-            AudioPiped(url)
-        ),
+        InputStream(AudioPiped(url)),
         stream_type="local_stream"
     )
 
