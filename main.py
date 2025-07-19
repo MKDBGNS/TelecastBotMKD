@@ -22,6 +22,9 @@ async def start_command(_, message):
 @bot.on_message(filters.command("ping"))
 async def ping_command(_, message):
     await message.reply_text("🏓 Pong!")
+@bot.on_message()
+async def catch_all(_, message):
+    print(f"🔍 Received message: {message.text}")
 
 # Run the bot
 async def main():
