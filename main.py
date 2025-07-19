@@ -68,11 +68,11 @@ async def main():
 
         @bot.on_message(filters.command("start"))
         async def start_command(_, message):
-        await message.reply_text("Hello, Manoranjan! The bot is live and ready. 🚀")
+            await message.reply_text("Hello, Manoranjan! The bot is live and ready. 🚀")
 
         @bot.on_message(filters.command("ping"))
         async def ping_command(_, message):
-        await message.reply_text("Pong! ✅")
+            await message.reply_text("Pong! ✅")
         await idle()
         return
 
