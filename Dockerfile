@@ -6,6 +6,10 @@ RUN apt update && \
     apt install -y ffmpeg wget gnupg && \
     apt clean
 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+
 # 📁 Set working directory
 WORKDIR /app
 
