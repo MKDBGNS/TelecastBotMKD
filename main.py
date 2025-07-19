@@ -24,20 +24,20 @@ async def start_handler(_, message):
 @bot.on_message()
 async def catch_all(_, message):
     print(f"🔍 Received message: {message.text}")
+
 @bot.on_message(filters.command("play"))
 async def play_command(_, message):
-    if not message.chat.type in ["supergroup", "group"]:
+    if message.chat.type not in ["supergroup", "group"]:
         return await message.reply("❗ Use this in a group with VC.")
-    
+
     query = message.text.split(" ", 1)
     if len(query) < 2:
         return await message.reply("🎵 Provide a song name or YouTube link.")
 
-    # ✅ Start VC client first!
+    # ✅ Start client before streaming
     vc_client.start()
     pytgcalls.start()
 
-    # 🎶 Now stream
     title = await stream_youtube(message.chat.id, query[1])
     await message.reply(f"🎶 Streaming: {title}")
 
