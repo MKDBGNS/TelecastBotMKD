@@ -33,12 +33,14 @@ if Config.DATABASE_URI:
 
 @bot.on_message(filters.command("start"))
 async def start_command(_, message):
+    print("🟡 Received /start")
     await message.reply_text("Hello, Manoranjan! The bot is live and ready. 🚀")
 
 @bot.on_message(filters.command("ping"))
 async def ping_command(_, message):
     await message.reply_text("Pong! ✅")
 async def main():
+    print("🟢 Bot is starting...")
     await bot.start()
     Config.BOT_USERNAME = (await bot.get_me()).username
 
@@ -63,6 +65,7 @@ async def main():
             LOGGER.error(f"Errors occured while setting up database for VCPlayerBot, check the value of DATABASE_URI. Full error - {str(e)}", exc_info=True)
             Config.STARTUP_ERROR="Errors occured while setting up database for VCPlayerBot, check the value of DATABASE_URI. Full error - {str(e)}"
             LOGGER.info("Activating debug mode, you can reconfigure your bot with /env command.")
+            print("🔴 Falling into debug mode")
             await bot.stop()
             from utils import debug
             await debug.start()
