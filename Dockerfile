@@ -1,5 +1,7 @@
 FROM python:3.10-slim
 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
 RUN apt update && apt upgrade -y
 RUN apt install ffmpeg -y
